@@ -2,27 +2,27 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 
 import * as userActions from '../../store/actions';
-import { authLogin } from '../../api/authApi';
-import { UserContext } from '../../common';
+import { UserContext, useLocalStorage } from '../../common';
 
 import { connect } from 'react-redux';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 const SignIn = ({ location, currentUser, requestUserSignIn, ...props }) => {
+  const [accessToken, storeAccessToken] = useLocalStorage('authToken');
   const [signInForm, setSignInForm] = useState({
     userName: '',
-    password: ''
+    password: '',
   });
   const { user, setUser } = useContext(UserContext);
   const { referrer } = location.state || { referrer: '/todos' };
 
-  const handleOnChange = event => {
+  const handleOnChange = (event) => {
     const { target = {} } = event || {};
     const { name = '', value = '' } = target || {};
-    setSignInForm(form => ({ ...form, [name]: value.trim() }));
+    setSignInForm((form) => ({ ...form, [name]: value.trim() }));
   };
 
-  const handleLogin = event => {
+  const handleLogin = (event) => {
     event.preventDefault();
     requestUserSignIn(signInForm.userName, signInForm.password);
     // (async () => {
@@ -32,14 +32,15 @@ const SignIn = ({ location, currentUser, requestUserSignIn, ...props }) => {
   };
 
   useEffect(() => {
-    currentUser &&
-      currentUser.identity &&
-      setUser(user => ({
+    if (currentUser && currentUser.identity) {
+      storeAccessToken(currentUser.identity.accessToken);
+      setUser((user) => ({
         ...user,
         userName: currentUser.identity.username,
-        isAuthenticated: currentUser.isAuthenticated
+        isAuthenticated: currentUser.isAuthenticated,
       }));
-  }, [currentUser, setUser]);
+    }
+  }, [currentUser, setUser, storeAccessToken]);
 
   return (
     <React.Fragment>
@@ -106,15 +107,12 @@ const SignIn = ({ location, currentUser, requestUserSignIn, ...props }) => {
 
 function mapStateToProps(state, ownProps) {
   return {
-    currentUser: state.user
+    currentUser: state.user,
   };
 }
 
 const mapDispatchToProps = {
-  requestUserSignIn: userActions.requestUserSignIn
+  requestUserSignIn: userActions.requestUserSignIn,
 };
 
-export const SignInPage = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignIn);
+export const SignInPage = connect(mapStateToProps, mapDispatchToProps)(SignIn);

@@ -3,11 +3,13 @@ import { NavLink, withRouter } from 'react-router-dom';
 
 import * as actions from '../store/actions';
 import { UserContext } from './UserContext';
+import useLocalStorage from './useLocalStorage';
 
 import { useDispatch } from 'react-redux';
 
 const WrappedHeader = ({ history }) => {
   const dispatch = useDispatch();
+  const [accessToken, clearAccessToken] = useLocalStorage('authToken');
   const { user, setUser } = useContext(UserContext);
 
   // useEffect(() => {
@@ -17,11 +19,12 @@ const WrappedHeader = ({ history }) => {
   const activeStyle = { color: 'orange' };
 
   const handleLogout = () => {
+    clearAccessToken()
     dispatch(actions.requestUserSignOut());
-    setUser(user => ({
+    setUser((user) => ({
       ...user,
       userName: '',
-      isAuthenticated: false
+      isAuthenticated: false,
     }));
     history.push('/');
   };
@@ -76,7 +79,8 @@ const WrappedHeader = ({ history }) => {
             onClick={handleLogout}
             className="nav-item nav-link float-right"
           >
-            <span className="glyphicon glyphicon-user"/>Logout {user.userName}
+            <span className="glyphicon glyphicon-user" />
+            Logout {user.userName}
           </a>
         </span>
       )}
