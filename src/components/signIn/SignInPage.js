@@ -2,13 +2,12 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 
 import * as userActions from '../../store/actions';
-import { UserContext, useLocalStorage } from '../../common';
+import { UserContext } from '../../common';
 
 import { connect } from 'react-redux';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 const SignIn = ({ location, currentUser, requestUserSignIn, ...props }) => {
-  const [accessToken, storeAccessToken] = useLocalStorage('authToken');
   const [signInForm, setSignInForm] = useState({
     userName: '',
     password: '',
@@ -33,14 +32,13 @@ const SignIn = ({ location, currentUser, requestUserSignIn, ...props }) => {
 
   useEffect(() => {
     if (currentUser && currentUser.identity) {
-      storeAccessToken(currentUser.identity.accessToken);
       setUser((user) => ({
         ...user,
         userName: currentUser.identity.username,
         isAuthenticated: currentUser.isAuthenticated,
       }));
     }
-  }, [currentUser, setUser, storeAccessToken]);
+  }, [currentUser, setUser]);
 
   return (
     <React.Fragment>

@@ -20,13 +20,6 @@ function userReducer(state = initialState, action) {
         draft.identity = null;
         draft.error = action.errorMsg;
       });
-    case actionTypes.USER_SIGNOUT:
-      return produce(state, draft => {
-        draft.identity = null;
-        draft.isAuthenticated = false;
-        draft.error = '';
-      });
-
     default:
       return state;
   }

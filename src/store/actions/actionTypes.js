@@ -1,14 +1,18 @@
 export const CREATE_EVENT = '[Events] Create Event';
 
-export const GET_GROUPS_SUCCESS = '[ToDos] Get Groups Success';
-export const GET_GROUPS_FAIL = '[ToDos] Get Groups Fail';
-export const ADD_GROUP_SUCCESS = '[ToDos] Add Group Success';
-export const UPDATE_GROUP_SUCCESS = '[ToDos] Update Group Success';
-export const GET_TASKS_SUCCESS = '[ToDos] Get Tasks Success';
-export const ADD_TASK_SUCCESS = '[ToDos] Add Task Success';
-export const UPDATE_TASK_SUCCESS = '[ToDos] Update Task Success';
+export const GET_GROUPS_SUCCESS = '[ToDos Group] Get Groups Success';
+export const GET_GROUPS_FAIL = '[ToDos Group] Get Groups Fail';
 
-export const USER_SIGNUP_FAIL = '[user] SignUp Fail';
+export const SAVE_GROUP_FAIL = '[Todos Group] Save Group Fail';
+export const ADD_GROUP_SUCCESS = '[ToDos Group] Add Group Success';
+export const UPDATE_GROUP_SUCCESS = '[ToDos Group] Update Group Success';
 
-export const USER_SIGNIN = '[user] SignIn';
-export const USER_SIGNOUT = '[user] SignOut';
+export const GET_TASKS_SUCCESS = '[ToDos Task] Get Tasks Success';
+export const SAVE_TASK_FAIL = '[Todos Task] Save Task Fail';
+export const ADD_TASK_SUCCESS = '[ToDos Task] Add Task Success';
+export const UPDATE_TASK_SUCCESS = '[ToDos Task] Update Task Success';
+
+export const USER_SIGNUP_FAIL = '[ToDos User] SignUp Fail';
+
+export const USER_SIGNIN = '[ToDos User] SignIn';
+export const USER_SIGNOUT = '[ToDos User] SignOut';

@@ -1,5 +1,6 @@
-import * as actionTypes from './actionTypes';
 import { v4 as uuid } from 'uuid';
+
+import * as actionTypes from './actionTypes';
 import * as userApi from '../../api/userApi';
 
 // Action Creators
@@ -20,6 +21,7 @@ export function requestUserSignOut() {
 // thunks
 export function requestUserSignUp(username, password) {
   return (dispatch, getState) => {
+    
     return userApi
       .signUp(uuid(), username, password)
       .then((user) => dispatch(userSignIn(user)), err => {

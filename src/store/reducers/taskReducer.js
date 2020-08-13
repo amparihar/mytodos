@@ -4,7 +4,7 @@ import { InitialState } from './initialState';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  tasks: InitialState.todos.tasks,
+  tasks: [],
   error: ''
 };
 

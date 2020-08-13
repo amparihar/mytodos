@@ -33,14 +33,19 @@ function updateGroupSuccess(group) {
   return { type: actionTypes.UPDATE_GROUP_SUCCESS, group };
 }
 
+function saveGroupsFail(errorMsg) {
+  return { type: actionTypes.SAVE_GROUP_FAIL, errorMsg };
+}
+
 // thunks
 export function requestGroups() {
   return (dispatch, getState) => {
-    return todosApi
-      .getGroups()
-      .then(groups => dispatch(getGroupsSuccess(groups)), err => {
-        dispatch(getGroupsFail('Api call failed.'))
-      });
+    return todosApi.getGroups(getState().user.identity.accessToken).then(
+      (groups) => dispatch(getGroupsSuccess(groups)),
+      (err) => {
+        dispatch(getGroupsFail(`Get groups request failed with error ${err}`));
+      }
+    );
   };
 }
 
@@ -54,8 +59,19 @@ export function requestSaveTask(task) {
 
 export function requestSaveGroup(group) {
   return (dispatch, getState) => {
-    group.id
-      ? dispatch(updateGroupSuccess(group))
-      : dispatch(addGroupSuccess({ ...group, id: uuid() }));
+    return todosApi
+      .saveGroup(
+        group.id ? group : { ...group, id: uuid() },
+        getState().user.identity.accessToken
+      )
+      .then(
+        (rsp) => {
+          group.id
+            ? dispatch(updateGroupSuccess(rsp))
+            : dispatch(addGroupSuccess(rsp));
+        },
+        (err) =>
+          dispatch(saveGroupsFail(`Save group request failed with error ${err}`))
+      );
   };
 }

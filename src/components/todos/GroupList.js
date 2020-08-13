@@ -1,14 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-// Redux Hooks
-import { useDispatch, useSelector } from 'react-redux';
 
 import { Modal } from '../../common';
 import ManageGroup from './ManageGroup';
 import * as actions from '../../store/actions';
 import { ConnectedTaskList } from './TaskList';
 
-const GroupList = ({ groups = [], fetchGroups }) => {
+const GroupList = ({ groups = [], requestGroups }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const handleAddNewClick = (e) => {
     e.preventDefault();
@@ -19,7 +17,7 @@ const GroupList = ({ groups = [], fetchGroups }) => {
 
   useEffect(() => {
     if (groups.length === 0) {
-      fetchGroups();
+      requestGroups();
     }
   }, []);
 
@@ -63,7 +61,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 const mapDispatchToProps = {
-  fetchGroups: actions.requestGroups,
+  requestGroups: actions.requestGroups,
 };
 
 export const ConnectedGroupList = connect(
