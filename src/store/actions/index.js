@@ -1,7 +1,8 @@
 export {
-  requestSaveTask,
   requestGroups,
-  requestSaveGroup
+  requestSaveGroup,
+  requestSaveTask,
+  requestTasks
 } from './todoActions';
 
 export { requestUserSignUp, requestUserSignIn, requestUserSignOut } from './userActions';

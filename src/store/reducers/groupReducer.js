@@ -1,9 +1,11 @@
 import produce from 'immer';
+
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   groups: [],
   error: '',
+  loading: false,
 };
 
 function groupReducer(state = initialState, action) {
@@ -17,6 +19,10 @@ function groupReducer(state = initialState, action) {
       return produce(state, (draft) => {
         draft.groups = [];
         draft.error = action.errorMsg;
+      });
+    case actionTypes.LOADING_GROUPS:
+      return produce(state, (draft) => {
+        draft.loading = action.loading;
       });
     case actionTypes.ADD_GROUP_SUCCESS:
       return produce(state, (draft) => {

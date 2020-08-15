@@ -1,5 +1,4 @@
-import { handleResponse, handleError } from './apiUtils';
-const baseUrl = 'https://g0cc3hsjb7.execute-api.ap-south-1.amazonaws.com/dev/todos/v1';
+import { handleResponse, handleError, baseUrl } from './apiUtils';
 
 export const signUp = (id, username, password) => {
   return fetch(`${baseUrl}/user`, {

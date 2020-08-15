@@ -16,6 +16,7 @@ function userReducer(state = initialState, action) {
         draft.error = '';
       });
     case actionTypes.USER_SIGNUP_FAIL:
+    case actionTypes.USER_SIGNIN_FAIL:
       return produce(state, draft => {
         draft.identity = null;
         draft.error = action.errorMsg;

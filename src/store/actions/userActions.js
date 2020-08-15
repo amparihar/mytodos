@@ -9,6 +9,10 @@ function userSignUpFail(errorMsg) {
   return { type: actionTypes.USER_SIGNUP_FAIL, errorMsg };
 }
 
+function userSignInFail(errorMsg) {
+  return { type: actionTypes.USER_SIGNIN_FAIL, errorMsg };
+}
+
 // process user signIn
 function userSignIn(user) {
   return { type: actionTypes.USER_SIGNIN, user };
@@ -41,7 +45,7 @@ export function requestUserSignIn(username, password) {
     return userApi
       .signIn(username, password)
       .then((user) => dispatch(userSignIn(user)), err => {
-        dispatch(userSignUpFail('Failed to SignIn.'))
+        dispatch(userSignInFail('Failed to SignIn.'))
       });
   };
 }

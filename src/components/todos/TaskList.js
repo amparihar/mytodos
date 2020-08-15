@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { Modal } from '../../common';
@@ -6,20 +6,20 @@ import ManageGroup from './ManageGroup';
 
 const WrappedTaskList = ({ id: groupId, name: groupName, tasks, ...props }) => {
   const [displayModal, setDisplayModal] = useState(false);
-  const handleEditGroupClick = e => {
+  const handleEditGroupClick = (e) => {
     e.preventDefault();
     setDisplayModal(true);
   };
-  useEffect(() => {
-    console.log(groupId);
-  }, [groupId]);
+  // useEffect(() => {
+  //   console.log(groupId);
+  // }, [groupId]);
   return (
     <div className="card">
       <div className="card-header" onClick={handleEditGroupClick}>
-        <h4 style={{cursor:'pointer', color:'blue'}}>{groupName} </h4>
+        <h4 style={{ cursor: 'pointer', color: 'blue' }}>{groupName} </h4>
       </div>
       <ul className="list-group list-group-flush">
-        {tasks.map(task => (
+        {tasks.map((task) => (
           <li key={task.id} className="list-group-item">
             <Link to={`${props.match.url}/task/${task.id}/${groupId}`}>
               {' '}
@@ -32,7 +32,6 @@ const WrappedTaskList = ({ id: groupId, name: groupName, tasks, ...props }) => {
               >
                 {task.name}
               </span>
-              
             </Link>
           </li>
         ))}
@@ -56,7 +55,10 @@ const WrappedTaskList = ({ id: groupId, name: groupName, tasks, ...props }) => {
           </button>
         </div>
         <div className="modal-body">
-          <ManageGroup groupId={groupId} onClose={() => setDisplayModal(false)} />
+          <ManageGroup
+            groupId={groupId}
+            onClose={() => setDisplayModal(false)}
+          />
         </div>
       </Modal>
     </div>
@@ -66,7 +68,7 @@ const WrappedTaskList = ({ id: groupId, name: groupName, tasks, ...props }) => {
 const mapStateToProps = (state, ownProps) => {
   const { id: groupId } = ownProps;
   return {
-    tasks: state.todos.task.tasks.filter(task => task.group === groupId)
+    tasks: state.todos.task.tasks.filter((task) => task.groupId === groupId),
   };
 };
 

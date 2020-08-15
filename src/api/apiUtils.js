@@ -1,4 +1,6 @@
 
+export const baseUrl = 'https://8rjrou3fe4.execute-api.ap-south-1.amazonaws.com/dev/todos/v1';
+
 export async function handleResponse(response) {
   if (response.ok) {
     return response.json();

@@ -22,7 +22,7 @@ const mapStateToProps = (state, ownProps) => {
     task: state.todos.task.tasks.find(task => task.id === taskId) || {
       name: '',
       id: '',
-      group: groupId,
+      groupId,
       isComplete: false
     }
   };

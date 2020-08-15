@@ -6,7 +6,14 @@ import ManageGroup from './ManageGroup';
 import * as actions from '../../store/actions';
 import { ConnectedTaskList } from './TaskList';
 
-const GroupList = ({ groups = [], requestGroups }) => {
+const GroupList = ({
+  groups = [],
+  requestGroups,
+  loadingGroups,
+  tasks = [],
+  requestTasks,
+  loadingTasks,
+}) => {
   const [displayModal, setDisplayModal] = useState(false);
   const handleAddNewClick = (e) => {
     e.preventDefault();
@@ -18,6 +25,9 @@ const GroupList = ({ groups = [], requestGroups }) => {
   useEffect(() => {
     if (groups.length === 0) {
       requestGroups();
+    }
+    if (tasks.length === 0) {
+      requestTasks();
     }
   }, []);
 
@@ -55,13 +65,18 @@ const GroupList = ({ groups = [], requestGroups }) => {
 
 function mapStateToProps(state, ownProps) {
   return {
+    loadingGroups: state.todos.group.loading,
     groups: state.todos.group.groups,
-    error: state.todos.group.error,
+    groupError: state.todos.group.error,
+    loadingTasks: state.todos.task.loading,
+    tasks: state.todos.task.tasks,
+    taskError: state.todos.task.error,
   };
 }
 
 const mapDispatchToProps = {
   requestGroups: actions.requestGroups,
+  requestTasks: actions.requestTasks,
 };
 
 export const ConnectedGroupList = connect(
