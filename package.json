@@ -28,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "aws s3 cp --recursive ./build s3://mytodosapp.com"
+    "deploy": "aws s3 cp --recursive ./build s3://mytodosapp.com --profile amitp"
   },
   "eslintConfig": {
     "extends": "react-app"
