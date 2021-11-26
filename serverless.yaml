@@ -1,0 +1,17 @@
+service: todos-webapp
+
+plugins: 
+  - serverless-finch
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  
+custom:
+ 
+  client:
+    bucketName: mytodos.web.com
+    #bucketPolicyFile: policy.json
+    distributionFolder: build
+    indexDocument: index.html
+    errorDocument: index.html
