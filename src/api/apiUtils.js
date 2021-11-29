@@ -1,5 +1,5 @@
 
-export const baseUrl = 'https://8rjrou3fe4.execute-api.ap-south-1.amazonaws.com/dev/todos/v1';
+export const baseUrl = 'https://d14hq0mcoez9if.cloudfront.net/prod/api/v1';
 
 export async function handleResponse(response) {
   if (response.ok) {

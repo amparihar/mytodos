@@ -1,3 +1,11 @@
+Serverless Finch deploy
+
+npm i 
+serverless client deploy --region $REGION --no-delete-contents --no-config-change --no-policy-change --no-cors-change
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

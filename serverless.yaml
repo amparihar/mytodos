@@ -10,7 +10,7 @@ provider:
 custom:
  
   client:
-    bucketName: mytodos.web.com
+    bucketName: mytodos.web
     #bucketPolicyFile: policy.json
     distributionFolder: build
     indexDocument: index.html
